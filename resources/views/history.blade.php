@@ -5,7 +5,7 @@
 	<table class="table table-striped table-light table-borderless table-hover">
 		<thead class="thead-dark text-center">
 			<tr>
-				<th>Id Task</th>
+				<th>Number</th>
 				<th>Task Name</th>
 				<th>My Activity</th>
 				<th>Created At</th>
@@ -13,9 +13,11 @@
 			</tr>
 		</thead>	
 		<tbody>
+			<?php $i = 1;  ?>
 		@foreach($history as $histo)
+			
 			<tr class="table-light text-center">
-				<th class="alert alert-danger">{{$histo->id}}</th>
+				<th class="alert alert-danger"> {{$i++}}</th>
 						<td >{{$histo->name_task}}</td>
 						<td>{{$histo->kegiatan}}</td>		
 						<td class="alert alert-primary">{{$histo->created_at}}</td>
@@ -24,7 +26,7 @@
 			@endforeach
 			
 		</tbody>
-		
+			
 	</table>
 </div>
 @endsection

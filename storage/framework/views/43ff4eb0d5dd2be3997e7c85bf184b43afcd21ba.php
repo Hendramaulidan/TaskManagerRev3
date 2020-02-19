@@ -3,7 +3,7 @@
 	<table class="table table-striped table-light table-borderless table-hover">
 		<thead class="thead-dark text-center">
 			<tr>
-				<th>Id Task</th>
+				<th>Number</th>
 				<th>Task Name</th>
 				<th>My Activity</th>
 				<th>Created At</th>
@@ -11,9 +11,11 @@
 			</tr>
 		</thead>	
 		<tbody>
+			<?php $i = 1;  ?>
 		<?php $__currentLoopData = $history; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $histo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+			
 			<tr class="table-light text-center">
-				<th class="alert alert-danger"><?php echo e($histo->id); ?></th>
+				<th class="alert alert-danger"> <?php echo e($i++); ?></th>
 						<td ><?php echo e($histo->name_task); ?></td>
 						<td><?php echo e($histo->kegiatan); ?></td>		
 						<td class="alert alert-primary"><?php echo e($histo->created_at); ?></td>
@@ -22,7 +24,7 @@
 			<?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 			
 		</tbody>
-		
+			
 	</table>
 </div>
 <?php $__env->stopSection(); ?>

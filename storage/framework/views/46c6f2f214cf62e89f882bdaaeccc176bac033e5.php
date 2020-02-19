@@ -23,9 +23,7 @@
 					<a href="" data-toggle="modal" data-target="#exampleModal"class="text-dark">New Parent Task&nbsp;<i class="fas fa-plus-circle"></i></a>
 				</th>
 			</tr>
-      
-
-    <?php $__currentLoopData = $use; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+      <?php $__currentLoopData = $use; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
     
     		<tr> 
 
@@ -45,16 +43,18 @@
 
     				</td>
     				<td> 
-    					<a href="home/<?php echo e($item->id); ?>"><i class="fas fa-forward"></i></a>	
+    					<a href="home/<?php echo e(Crypt::encrypt($item->id)); ?>/nextpage"data-toggle="tooltip"data-placement="bottom"title="Next"><i class="fas fa-forward"></i></a>	
               &nbsp;&nbsp;&nbsp;
-              <a href="#"data-toggle="modal" data-target="#modalku<?php echo e($item->id); ?>"class="text-warning"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
-              <a href="/home/ParDel/<?php echo e($item->id); ?>"class="text-danger"><i class="fas fa-trash"></i></a> 
+              <a href="#"data-toggle="modal" data-target="#modalku<?php echo e($item->id); ?>"class="text-warning"data-toggle="tooltip"data-placement="bottom"title="Edit"><i class="fas fa-edit"></i></a> &nbsp;&nbsp;&nbsp;
+       <a href="/home/ParDel/<?php echo e($item->id); ?>"class="text-danger"data-toggle="tooltip"data-placement="up"title="Delete"><i class="fas fa-trash"></i></a>
     				</td>
           
     		</tr>
   
     <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
 
+    
+</table>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -65,14 +65,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/home/newParent"method="post"class="form-group"> 
+        <form action="/home/newParent"method="post"class="form-group"id="form-parent"> 
         			<?php echo e(csrf_field()); ?>
 
         		Insert Here : 
         			<input type="text" name="parentTask"required="required"placeholder="insert parent task name"class="form-control mb-3">
               Insert Email For Parent Task :
         			<input type="email" name="email"required="required"placeholder="insert Email Here"class="form-control mb-3">
-        			<input type="submit"class="btn btn-primary">
+        			<input type="button"class="btn btn-primary"id="btnku"value="submit">
         </form>
       </div>
       <div class="modal-footer">
@@ -111,6 +111,7 @@
 </div>
 </div>
 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+
 <?php $__env->stopSection(); ?>
 <!-- Modal -->
 

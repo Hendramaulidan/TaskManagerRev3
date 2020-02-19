@@ -8,11 +8,16 @@ use Illuminate\Support\Facades\DB;
 use App\TaskModel;
 class AwalController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('auth',['except'=>['index']]);
+    }
     public function index()
     {
         return view('welcome');
         
     }
+    
     public function process()
     {
     	$start = TaskModel::where('user_id',Auth::user()->id)->where('name_task','Start')->get();
@@ -70,7 +75,7 @@ class AwalController extends Controller
     	$taskDel =  TaskModel::find($id);
 		$taskDel->delete();
     	return redirect('home/process');
-    }
+	}
 
 }
 

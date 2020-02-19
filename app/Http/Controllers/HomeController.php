@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 use Carbon\Carbon;
 use App\Column;
 use App\TaskModel;
@@ -28,15 +29,17 @@ class HomeController extends Controller
         $column->delete();
         return redirect('/home/history');
     }
-        
     public function index()
     {
         $use = DB::table('columns')->get()->where('user_id',Auth::user()->id);
+
         return view('first',compact('use'));
         
     }
+    
         function status($id)
     {
+    	$id = Crypt::decrypt($id);
         $item = Column::find($id);
         return  view('home',compact('item'));
     }
@@ -66,7 +69,6 @@ class HomeController extends Controller
             'column_id'=>$request->input('id_col'),
             'user_id' => Auth::user()->id
         ]);
-        return redirect('home/'.$id);
     }
     public function parDel($id)
     {

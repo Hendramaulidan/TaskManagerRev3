@@ -6,7 +6,7 @@
 @endif
 <div class="container"> 
   <h2 class="display-4  mb-3 text-center"> 
-      Parent Task {{$item->status}}
+      Parent Task from :  " {{$item->status}} "
   </h2> 
   
 
@@ -54,14 +54,14 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/home/newTask/{{$item->id}}"method="post"class="form-group"> 
+        <form action="/home/newTask/{{Crypt::encrypt($item->id)}}/nextpage"method="post"class="form-group"id="formTask"> 
               {{csrf_field()}}
             Name:
               <input type="text" name="nameTask"required="required"placeholder="insert task name"class="form-control mb-3">
               Activity:
               <textarea class="form-control mb-3" name="Activity"placeholder="insert text"></textarea>
               <input type="hidden"value="{{$item->id}}" name="id_col">
-              <input type="submit"class="btn btn-primary">
+              <input type="button"class="btn btn-primary"id="btnTask"value="insert">
         </form>
       </div>
       <div class="modal-footer">
@@ -71,6 +71,21 @@
   </div>
 </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function () {
+                $('#btnTask').click(function () {
+                  $('#btnTask').attr('disabled',true);
+                  var data = $('#formTask').serialize();
+                  $.ajax({
+                    type :'POST',
+                    url  : '/home/newTask/{{Crypt::encrypt($item->id)}}/nextpage',
+                    data : data,
+                    success:function () {
+                      window.location.reload();
 
-
+                    }
+                });
+            });
+        });
+</script>
 @endsection

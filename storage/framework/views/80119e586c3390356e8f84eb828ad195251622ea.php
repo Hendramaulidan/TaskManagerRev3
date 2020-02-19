@@ -5,8 +5,7 @@
 <?php endif; ?>
 <div class="container"> 
   <h2 class="display-4  mb-3 text-center"> 
-      Parent Task <?php echo e($item->status); ?>
-
+      Parent Task from :  " <?php echo e($item->status); ?> "
   </h2> 
   
 
@@ -55,7 +54,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="/home/newTask/<?php echo e($item->id); ?>"method="post"class="form-group"> 
+        <form action="/home/newTask/<?php echo e(Crypt::encrypt($item->id)); ?>/nextpage"method="post"class="form-group"id="formTask"> 
               <?php echo e(csrf_field()); ?>
 
             Name:
@@ -63,7 +62,7 @@
               Activity:
               <textarea class="form-control mb-3" name="Activity"placeholder="insert text"></textarea>
               <input type="hidden"value="<?php echo e($item->id); ?>" name="id_col">
-              <input type="submit"class="btn btn-primary">
+              <input type="button"class="btn btn-primary"id="btnTask"value="insert">
         </form>
       </div>
       <div class="modal-footer">
@@ -73,8 +72,23 @@
   </div>
 </div>
 </div>
+<script type="text/javascript">
+  $(document).ready(function () {
+                $('#btnTask').click(function () {
+                  $('#btnTask').attr('disabled',true);
+                  var data = $('#formTask').serialize();
+                  $.ajax({
+                    type :'POST',
+                    url  : '/home/newTask/<?php echo e(Crypt::encrypt($item->id)); ?>/nextpage',
+                    data : data,
+                    success:function () {
+                      window.location.reload();
 
-
+                    }
+                });
+            });
+        });
+</script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.app', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH D:\xampp\htdocs\TaskManager\resources\views/home.blade.php ENDPATH**/ ?>

@@ -67,11 +67,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="\taskdef\newstart"class="form-group">
+        <form action="\taskdef\newstart"class="form-group"id="form-start">
           {{csrf_field()}}
         	Insert new activity : 
         	<textarea required="required"name="activity"class="form-control mb-2"></textarea>
-        	<input type="submit" value="Submit"class="btn btn-dark">
+        	<input type="button" value="Submit"class="btn btn-dark"id="startTask">
         </form>
       </div>
       <div class="modal-footer">
@@ -94,11 +94,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="\taskdef\newprocess"class="form-group">
+        <form action="\taskdef\newprocess"class="form-group"id="form-process">
           {{csrf_field()}}
         	Insert new activity : 
         	<textarea required="required"name="activity"class="form-control mb-2"></textarea>
-        	<input type="submit" value="Submit"class="btn btn-dark">
+        	<input type="button" value="Submit"class="btn btn-dark"id="processTask">
         </form>
       </div>
       <div class="modal-footer">
@@ -121,11 +121,11 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="\taskdef\newfinish"class="form-group">
+        <form action="\taskdef\newfinish"class="form-group"id="form-finish">
           {{csrf_field()}}
         	Insert new activity : 
         	<textarea required="required"name="activity"class="form-control mb-2"></textarea>
-        	<input type="submit" value="Submit"class="btn btn-dark">
+        	<input type="button" value="Submit"class="btn btn-dark"id="finishTask">
         </form>
       </div>
       <div class="modal-footer">
@@ -135,7 +135,54 @@
   </div>
 </div>
 
+<script type="text/javascript">
+  $(document).ready(function () {
+    $('#finishTask').click(function () {
+      $('#finishTask').attr('disabled',true)
+      var data = $('#form-finish').serialize()
+      $.ajax({
+        type : 'GET',
+        url : '/taskdef/newfinish',
+        data : data,
+        success:function () {
+          window.location.reload()
+        }
+      })
 
+    })
+  })
+
+$(document).ready(function () {
+    $('#processTask').click(function () {
+      $('#processTask').attr('disabled',true)
+      var data = $('#form-process').serialize()
+      $.ajax({
+        type : 'GET',
+        url : '/taskdef/newprocess',
+        data : data,
+        success:function () {
+          window.location.reload()
+        }
+      })
+
+    })
+  })
+$(document).ready(function () {
+    $('#startTask').click(function () {
+      $('#startTask').attr('disabled',true)
+      var data = $('#form-start').serialize()
+      $.ajax({
+        type : 'GET',
+        url : '/taskdef/newstart',
+        data : data,
+        success:function () {
+          window.location.reload()
+        }
+      })
+
+    })
+  })
+</script>
 
 
 @endsection

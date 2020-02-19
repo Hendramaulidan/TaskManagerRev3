@@ -12,13 +12,13 @@
 <h2 class="text-center text-dark alert alert-light shadow-sm"><?php echo e(date('M')); ?></h2>
     <table class="table">
     <tr class="bg-dark">
-        <td class="text text-center text-danger">minggu</td>
-        <td class="text text-center text-light">Senin</td>
-        <td class="text text-center text-light">Selasa</td>
-        <td class="text text-center text-light">Rabu</td>
-        <td class="text text-center text-light">Kamis</td>
-        <td class="text text-center text-light">Jumat</td>
-        <td class="text text-center text-light">Sabtu</td>
+        <td class="text text-center text-danger">Sunday</td>
+        <td class="text text-center text-light">Monday</td>
+        <td class="text text-center text-light">Tuesday</td>
+        <td class="text text-center text-light">Wednesday</td>
+        <td class="text text-center text-light">Thursday</td>
+        <td class="text text-center text-light">Friday</td>
+        <td class="text text-center text-light">Saturday</td>
         </tr>
   <?php
     $s=date ("w", mktime (0,0,0,$bulan,1,$tahun));
